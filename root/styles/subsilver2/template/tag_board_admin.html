@@ -1,0 +1,64 @@
+<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}">
+<link href="{T_THEME_PATH}/tag_board.css" rel="stylesheet" type="text/css">
+<div id="admin">
+	<form name="tb_admin" method="post">
+	<table width="100%">
+		<tr>
+			<td align="right">Version : </td>
+			<td align="left">{VERSION}</td>
+		</tr>
+		<tr>
+			<td align="right" width="45%">Auth : </td>
+			<td align="left">
+				<input type="radio" name="tb_auth" value="1" {AUTH1}>R 4 all / W 4 reg
+				<br />
+				<input type="radio" name="tb_auth" value="2" {AUTH2}>R / W 4 all
+				<br />
+				<input type="radio" name="tb_auth" value="3" {AUTH3}>R / W 4 reg
+			</td>
+		</tr>
+		<tr>
+			<td align="right">ShowLast :</td>
+			<td align="left"><input name="tb_limit" size="1" style="text-align:right;" value="{LIMIT}"> tags</td>
+		</tr>
+		<tr>
+			<td align="right">TagsMaxLength : </td>
+			<td align="left"><input name="tb_maxlength" size="1" style="text-align:right;" value="{MAXLENGTH}"> chars</td>
+		</tr>
+		<tr>
+			<td align="right">ShowButtons : </td>
+			<td align="left">
+				<input type="radio" name="tb_buttons" value="1" {BUTTONS1}>Yes
+				<input type="radio" name="tb_buttons" value="0" {BUTTONS2}>No
+			</td>
+		</tr>
+		<tr>
+			<td align="right">ShowBsw : </td>
+			<td align="left">
+				<input type="radio" name="tb_bsw" value="1" {BSW1}>Yes
+				<input type="radio" name="tb_bsw" value="0" {BSW2}>No
+			</td>
+		</tr>
+		<tr>
+			<td align="right">AutoRefresh : </td>
+			<td align="left"><input name="tb_refresh" size="1" style="text-align:right;" value="{REFRESH}"> ( in seconds; 0 = OFF )</td>
+		</tr>
+		<tr>
+			<td align="right">AutoPurge : </td>
+			<td align="left"><input name="tb_purge" size="1" style="text-align:right;" value="{PURGE}"> ( in days; 0 = OFF )</td>
+		</tr>
+		<tr>
+			<td align="right">History : </td>
+			<td align="left"><input name="tb_history" size="1" style="text-align:right;" value="{HISTORY}"> ( tags stored in database; 0 = ALL )</td>
+		</tr>
+		<tr>
+			<td align="right">DeleteAllTags : </td>
+			<td align="left"><input type="checkbox" name="tb_deleteall" value="1" onClick="if(this.checked)if(confirm('{L_CONFIRM_OPERATION}')){return true;}else{return false;}"> ( if checked all tags are be deleted )</td>
+		</tr>
+		<tr>
+			<td align="right" height="40"><input type="submit" name="submit" value=" {L_CHANGE} " class="button1" /></td>
+			<td align="left"><input type="button" onClick="history.back()" value=" {L_CANCEL} " class="button2" /></td>
+		</tr>
+	</table>
+	</form>
+</div>

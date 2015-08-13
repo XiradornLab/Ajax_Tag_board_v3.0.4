@@ -1,0 +1,21 @@
+<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}">
+<link href="{T_THEME_PATH}/tag_board.css" rel="stylesheet" type="text/css">
+<!-- IF REFRESH --><meta http-equiv="refresh" content="{REFRESH}"><!-- ENDIF -->
+<!-- BEGIN tb_postrow -->
+	<div class="{tb_postrow.STYLE}">
+		<!-- IF tb_postrow.S_OPTIONS -->
+			<a href="{tb_postrow.U_DELETE}"><img src="adm/images/icon_delete.gif" align="absmiddle" width="12" height="12" border="0" alt="{L_DELETE_POST}"></a>
+			<a href="{tb_postrow.U_EDIT}"><img src="adm/images/icon_edit.gif" align="absmiddle" width="12" height="12" border="0" alt="{L_EDIT_POST}"></a>
+		<!-- ENDIF -->
+		<span class="post_time">{tb_postrow.POST_TIME}</span>
+		<br />
+		<!-- IF tb_postrow.U_PROFILE -->
+			<a href="{tb_postrow.U_PROFILE}" style="color:#{tb_postrow.USER_COLOUR};" target="_top"><b><span class="post_username">{tb_postrow.POST_USERNAME}</span></b></a>
+		<!-- ELSE -->
+			<b><span class="post_username">{tb_postrow.POST_USERNAME}</span></b>
+		<!-- ENDIF -->
+		:.
+		<br />
+		<span class="post_text">{tb_postrow.POST_TEXT}</span>
+	</div>
+<!-- END tb_postrow -->

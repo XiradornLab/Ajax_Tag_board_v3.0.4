@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="../modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http
+://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		
+		<title lang="en">Message System Plugin 4 Ajax Tag Board</title>
+		
+		<description lang="en">If a user made a new post (reply or a topic), a new shout is automatically sent on Tag Board</description>
+		
+		<author-group>
+			<author>
+				<realname>Vincenzo Langella</realname>
+				<username>bx67212</username>
+				<homepage>http://bx67212.netsons.org</homepage>
+			</author>
+		</author-group>
+		
+		<mod-version>1.2</mod-version>
+		
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.7</target-version>
+		</installation>
+
+		<history>
+			<entry>
+				<date>2009-12-02</date>
+				<rev-version>1.2</rev-version>
+				<changelog lang="en">
+					<change>[Fix] Parent Forum link</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-08-22</date>
+				<rev-version>1.1</rev-version>
+				<changelog lang="en">
+					<change>[+] Parent Forum link</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-08-20</date>
+				<rev-version>1.0</rev-version>
+				<changelog lang="en">
+					<change>1st release</change>
+				</changelog>
+			</entry>
+		</history>
+
+		<link-group>
+			<link type="language" href="msp_it.xml" lang="en">italian</link>
+		</link-group>
+	</header>
+	
+	<action-group>
+		<open src="posting.php">
+			<edit>
+				<find><![CDATA[include($phpbb_root_path . 'includes/message_parser.' . $phpEx);]]></find>
+				<action type="after-add"><![CDATA[define('TB_TABLE', $table_prefix . 'tag_board');]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[			$redirect_url = submit_post($mode, $post_data['post_subject'], $post_data['username'], $post_data['topic_type'], $poll, $data, $update_message, ($update_message || $update_subject) ? true : false);]]></find>
+				<action type="after-add"><![CDATA[		// Tag Board Plugin
+		if($redirect_url && ($mode == 'post' || $mode == 'reply'))
+		{
+			if(isset($poll['poll_title']))
+			{
+				$message = $user->lang['TB_NEW_POLL'] . ': <a href="' . $redirect_url . '">' . $poll['poll_title'] . '</a>';
+			}
+			else if($mode == 'post')
+			{
+				$message = $user->lang['TB_NEW_TOPIC'] . ': <a href="' . $redirect_url.'">' . $data['topic_title'] . '</a>';
+			}
+			else
+			{
+				$message = $user->lang['TB_NEW_POST'] . ': <a href="' . $redirect_url.'">' . $data['topic_title'] . '</a>';
+			}
+			if(preg_match('/(.+)(f=[0-9]+)/', $redirect_url, $forum_url))
+			{
+				$forum_url = preg_replace('/(viewtopic)/', 'viewforum', $forum_url[0]);
+				$message .= ' ' . $user->lang['TB_NEW_FORUM'] . ': <a href="' . $forum_url . '">' . $data['forum_name'] . '</a>';
+			}
+			$sql_ary = array(
+				'tb_poster_id' 			=> $user->data['user_id'],
+				'tb_post_time' 			=> $current_time,
+				'tb_post_username' 		=> $user->data['user_id'] != ANONYMOUS ? $user->data['username'] : $user->ip,
+				'tb_post_text' 			=> $message,
+				'tb_bbcode_bitfield' 	=> '',
+				'tb_bbcode_uid' 		=> '',
+				'tb_flags' 				=> 0,
+			);
+			$sql = 'INSERT INTO ' . TB_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
+			$db->sql_query($sql);
+		}]]></action>
+			</edit>
+		</open>
+		<open src="language/en/common.php">
+			<edit>
+				<find><![CDATA[	'YOU_NO_NEW_PM'		=> 'No new private messages are waiting for you.',]]></find>
+				<action type="after-add"><![CDATA[	'TB_NEW_POLL' 				=> 'I made a new poll',
+	'TB_NEW_TOPIC' 				=> 'I made a new topic',
+	'TB_NEW_POST' 				=> 'I reply to the topic',
+	'TB_NEW_FORUM' 				=> 'on the forum',]]></action>
+			</edit>
+		</open>
+	</action-group>
+</mod>

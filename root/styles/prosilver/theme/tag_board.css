@@ -1,0 +1,103 @@
+body{
+	background-color:#0076B0;
+	color:#333;
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size:0.7em;
+}
+a:link{
+	color:#368AD2;
+	text-decoration:none;
+}
+a:visited{
+	color:#5D8FBD;
+	text-decoration:none;
+}
+a:hover{
+	color:#0D4473;
+	text-decoration:underline;
+}
+table{
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size:1.0em;
+}
+#confirm{
+	height:95%;
+	margin-left:15px;
+	padding-top:40px;
+	border:solid 1px #A9B8C2;
+	text-align:center;
+}
+#edit{
+	height:95%;
+	margin-left:15px;
+	padding-top:25px;
+	border:solid 1px #A9B8C2;
+	text-align:center;
+}
+#admin{
+	height:95%;
+	margin-right:15px;
+	margin-left:15px;
+	padding-top:15px;
+	border:solid 1px #A9B8C2;
+	text-align:center;
+}
+.style1,.style2{
+	background-color:#D4E1EC;
+	border-bottom:#00608F 1px solid;
+	border-top:#FFFFFF 1px solid;
+	padding:3px;
+	font-size:0.85em;
+}
+.post_time{
+	color:#666;
+}
+.post_username{
+	/* usr's span */
+}
+.post_text{
+	color:#333;
+}
+.uncited{
+	background:#ebebeb none 6px 8px no-repeat;
+	border:1px solid #dbdbdb;
+	font-size:0.95em;
+	margin-top:3px;
+	margin-right:5px;
+	margin-bottom:3px;
+	margin-left:5px;
+	padding:4px;
+}
+.codebox{
+	margin:0px;
+	padding:5px;
+}
+.codebox dt{
+	display:none;
+}
+.codebox dd{
+	margin:0px;
+	background:#ebebeb none 6px 8px no-repeat;
+	border:1px solid #dbdbdb;
+	padding:3px;
+}
+.codebox code{
+	font-size:1em;
+}
+.button1{
+	font-family:Verdana,Helvetica,Arial,sans-serif;
+	color:#000;
+	font-size:1.0em;
+	font-weight:bold;
+	border: 1px solid #BCBCBC;
+	background:#EFEFEF url("adm/images/bg_button.gif") repeat-x top;
+	cursor:pointer;
+}
+.button2{
+	font-family:"Lucida Grande",Verdana,Helvetica,Arial,sans-serif;
+	color:#000;
+	font-size:1.0em;
+	border: 1px solid #BCBCBC;
+	background:#EFEFEF url("adm/images/bg_button.gif") repeat-x top;
+	cursor:pointer;
+}

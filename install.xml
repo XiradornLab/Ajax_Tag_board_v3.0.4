@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http
+://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		
+		<title lang="en">AJAX TAG BOARD 4 phpBB3</title>
+		
+		<description lang="en">Add ajax tagboard to a phpBB3 board</description>
+		
+		<author-notes lang="en">This installer is MySQL-only. FIX TIP, WARNING!, NOTE, FAIL (tHx to A_Jelly_Doughnut, TerraFrost, eviL&lt;3, DavidIQ, platinum_2007, Derky, RMcGirr83, A_O_C, MPV ^^)</author-notes>
+		
+		<author-group>
+			<author>
+				<realname>Vincenzo Langella</realname>
+				<username>bx67212</username>
+				<homepage>http://bx67212.netsons.org</homepage>
+			</author>
+		</author-group>
+		
+		<mod-version>3.0.7</mod-version>
+		
+		<installation>
+			<level>easy</level>
+			<time>600</time>
+			<target-version>3.0.7</target-version>
+		</installation>
+
+		<history>
+			<entry>
+				<date>2009-12-27</date>
+				<rev-version>3.0.6</rev-version>
+				<changelog lang="en">
+					<change>[Fix] Double post on submit</change>
+					<change>[+] Language de (tHx to Highway311)</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-08-22</date>
+				<rev-version>3.0.5</rev-version>
+				<changelog lang="en">
+					<change>[Fix] Smilies</change>
+					<change>[Fix] Color palette</change>
+					<change>[Fix] Online version checker</change>
+					<change>[Fix] Cookie settings for sound and unread post icon</change>
+					<change>[Fix] Users without permission can't view posts with link to hidden internal forum</change>
+					<change>[+] Ajax support</change>
+					<change>[+] Quote button</change>
+					<change>[+] Users denied</change>
+					<change>[+] Groups allowed</change>
+					<change>[+] Settings on ACP</change>
+					<change>[+] Unread post icon</change>
+					<change>[+] Sound on new posts</change>
+					<change>[+] Custom BBCodes button</change>
+					<change>[+] Users can set audio on/off</change>
+					<change>[+] Online/Inactive/Offline image</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-05-15</date>
+				<rev-version>3.0.4</rev-version>
+				<changelog lang="en">
+					<change>[Fix] Delete/Edit tags</change>
+					<change>[Change] Allow BBCode, Allow Smilies and Allow Urls</change>
+					<change>[+] Guestname</change>
+					<change>[+] FloodControl</change>
+					<change>[+] Delete all tags bottom</change>
+					<change>[+] Online version checker</change>
+					<change>[+] Tags stored in database control</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2008-12-12</date>
+				<rev-version>3.0.3</rev-version>
+				<changelog lang="en">
+					<change>[Fix] Remote Blind SQL Injection Exploit (tHx to j_gielgud ^^)</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2008-07-26</date>
+				<rev-version>3.0.2</rev-version>
+				<changelog lang="en">
+					<change>1st release</change>
+				</changelog>
+			</entry>
+		</history>
+
+		<link-group>
+			<link type="template" href="subsilver2.xml" lang="en">subsilver2</link>
+			<link type="language" href="it.xml" lang="en">italian</link>
+			<link type="language" href="de.xml" lang="en">german</link>
+			<link type="contrib" href="contrib/Message_System_Plugin.xml" lang="en">Message System Plugin</link>
+		</link-group>
+	</header>
+	
+	<action-group>
+		<copy>
+			<file from="root/tag_board.php" to="tag_board.php" />
+			<file from="root/tb_install.php" to="tb_install.php" />
+			<file from="root/includes/acp/acp_tag_board.php" to="includes/acp/acp_tag_board.php" />
+			<file from="root/includes/acp/info/acp_tag_board.php" to="includes/acp/info/acp_tag_board.php" />
+			<file from="root/language/en/tag_board.php" to="language/en/tag_board.php" />
+			<file from="root/styles/prosilver/template/tag_board.html" to="styles/prosilver/template/tag_board.html" />
+			<file from="root/styles/prosilver/template/tag_board_bbcodes.html" to="styles/prosilver/template/tag_board_bbcodes.html" />
+			<file from="root/styles/prosilver/template/tag_board_edit.html" to="styles/prosilver/template/tag_board_edit.html" />
+			<file from="root/styles/prosilver/template/tag_board_layout.html" to="styles/prosilver/template/tag_board_layout.html" />
+			<file from="root/styles/prosilver/template/tag_board_palette.html" to="styles/prosilver/template/tag_board_palette.html" />
+			<file from="root/styles/prosilver/template/tag_board_smilies.html" to="styles/prosilver/template/tag_board_smilies.html" />
+			<file from="root/styles/prosilver/theme/images/tb_add.swf" to="styles/prosilver/theme/images/tb_add.swf" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_audio.gif" to="styles/prosilver/theme/images/icon_tb_audio.gif" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_no_audio.gif" to="styles/prosilver/theme/images/icon_tb_no_audio.gif" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_delete.gif" to="styles/prosilver/theme/images/icon_tb_delete.gif" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_edit.gif" to="styles/prosilver/theme/images/icon_tb_edit.gif" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_guest.gif" to="styles/prosilver/theme/images/icon_tb_guest.gif" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_inactive.gif" to="styles/prosilver/theme/images/icon_tb_inactive.gif" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_offline.gif" to="styles/prosilver/theme/images/icon_tb_offline.gif" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_online.gif" to="styles/prosilver/theme/images/icon_tb_online.gif" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_quote.gif" to="styles/prosilver/theme/images/icon_tb_quote.gif" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_refresh.gif" to="styles/prosilver/theme/images/icon_tb_refresh.gif" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_unread.gif" to="styles/prosilver/theme/images/icon_tb_unread.gif" />
+			<file from="root/styles/prosilver/theme/images/icon_tb_waiting.gif" to="styles/prosilver/theme/images/icon_tb_waiting.gif" />
+		</copy>
+
+		<open src="includes/constants.php">
+			<edit>
+				<find><![CDATA[// Additional tables
+]]></find>
+				<action type="after-add"><![CDATA[define('TB_TABLE', $table_prefix . 'tag_board');]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[	// The following assigns all _common_ variables that may be used at any point in a template.
+	$template->assign_vars(array(]]></find>
+				<action type="after-add"><![CDATA[		'TB_AUTH'	=> $config['tb_auth'],
+		'TB_MAXLENGTH'	=> $config['tb_maxlength'],
+		'TB_BUTTONS'	=> $config['tb_buttons'],
+		'TB_BSW'	=> $config['tb_bsw'],
+		'TB_ALL_POSTS'	=> $total_tb_posts,
+		'TB_U_CP'	=> ($auth->acl_get('a_')) ? append_sid("{$phpbb_root_path}tag_board.php", 'mode=controlpanel') : null,
+		'TB_S_ACTION'	=> append_sid("{$phpbb_root_path}tag_board.php", 'mode=write'),
+		'TB_U_READALL'	=> append_sid("{$phpbb_root_path}tag_board.php", 'mode=all'),
+		'TB_U_REFRESH'	=> append_sid("{$phpbb_root_path}tag_board.php"),]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/index_body.html">
+			<edit>
+				<find><![CDATA[<!-- IF U_MCP --><p>{CURRENT_TIME} <br />[&nbsp;<a href="{U_MCP}">{L_MCP}</a>&nbsp;]</p><!-- ELSEIF S_USER_LOGGED_IN --><p>{CURRENT_TIME}</p><!-- ENDIF -->]]></find>
+				<action type="after-add"><![CDATA[<!-- INCLUDE tag_board.html -->]]></action>
+			</edit>
+    	</open>
+		<open src="styles/prosilver/theme/common.css">
+			<edit>
+				<find><![CDATA[.clear {
+	display: block;
+	clear: both;
+	font-size: 1px;
+	line-height: 1px;
+	background: transparent;
+}]]></find>
+				<action type="after-add"><![CDATA[/* Tag Board
+ ------------ */
+.tb_style1,.tb_style2{
+	background-color:#D4E1EC;
+	border-bottom:#00608F 1px solid;
+	border-top:#FFFFFF 1px solid;
+	padding:3px;
+	font-size:1em;
+}
+.tb_post_time{
+	color:#666666;
+}
+.tb_post_username{
+	/* usr's span */
+}
+.tb_post_text{
+	color:#333333;
+}
+.tb_pointer{
+	cursor:pointer;
+}]]></action>
+			</edit>
+    	</open>
+		
+		<diy-instructions lang="en">Go to YOUR_SITE/FORUM_ROOT/tb_install.php in your web browser. Purge the cache.</diy-instructions>
+	</action-group>
+</mod>

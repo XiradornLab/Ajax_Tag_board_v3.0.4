@@ -1,0 +1,192 @@
+<script language="javascript">
+function linkstoframe(){
+  var links = document.links;
+  for(i = 0; i < links.length; i++){
+    if (links[i].title == "tag_board"){
+      links[i].target = "tag_board";
+    }
+  }
+}
+function dE(n, s){
+	var e = document.getElementById(n);
+	if(!s){
+		s = (e.style.display == '' || e.style.display == 'block') ? -1 : 1;
+	}
+	e.style.display = (s == 1) ? 'block' : 'none';
+}
+function clear_input(){
+	document.getElementById('tb_message').value = '';
+	document.getElementById('tb_message').focus();
+}
+function insert_smilies(code){
+	document.getElementById('tb_message').value += ' ' + code + ' ';
+	document.getElementById('tb_message').focus();
+}
+function insert_bbcode(startTag,endTag){
+	document.getElementById('tb_message').focus();
+	// Internet Explorer:
+	if(typeof document.selection != 'undefined'){
+		// Insert the tags:
+		var range = document.selection.createRange();
+		var insText = range.text;
+		range.text = startTag + insText + endTag;
+		// Adjust the cursor position:
+		range = document.selection.createRange();
+		if(insText.length == 0){
+			range.move('character', -endTag.length);
+		}
+		else{
+			range.moveStart('character', startTag.length + insText.length + endTag.length);			
+		}
+		range.select();
+	}
+	// Firefox, etc. (Gecko based browsers):
+	else if(typeof document.getElementById('tb_message').selectionStart != 'undefined'){
+		// Insert the tags:
+		var start = document.getElementById('tb_message').selectionStart;
+		var end = document.getElementById('tb_message').selectionEnd;
+		var insText = document.getElementById('tb_message').value.substring(start, end);
+		document.getElementById('tb_message').value = document.getElementById('tb_message').value.substr(0, start)
+			+ startTag
+			+ insText
+			+ endTag
+			+ document.getElementById('tb_message').value.substr(end);
+		// Adjust the cursor position:
+		var pos;
+		if(insText.length == 0){
+			pos = start + startTag.length;
+		}
+		else{
+			pos = start + startTag.length + insText.length + endTag.length;
+		}
+		document.getElementById('tb_message').selectionStart = pos;
+		document.getElementById('tb_message').selectionEnd = pos;
+	}
+	// Other browsers:
+	else{
+		var pos = document.getElementById('tb_message').value.length;
+		document.getElementById('tb_message').value = document.getElementById('tb_message').value.substr(0, pos)
+			+ startTag
+			+ endTag
+			+ document.getElementById('tb_message').value.substr(pos);
+	}
+}
+function color_palette(height){
+	var numberList = new Array();
+	numberList[0] = '00';
+	numberList[1] = 'FF';
+	numberList[2] = '33';
+	numberList[3] = '66';
+	numberList[4] = '99';
+	numberList[5] = 'CC';
+	document.writeln('<table width="99%" cellspacing="2"><tr>');
+	for(r = 0; r < 2; r++){
+		for(g = 0; g < 2; g++){
+			for(b = 0; b < 2; b++){
+				color = String(numberList[r]) + String(numberList[g]) + String(numberList[b]);
+				document.write('<td><input type="button" style="background-color:#'+ color + ';height:' + height + 'px;width:100%;" onClick="insert_bbcode(\'[color=#' + color + ']\',\'[/color]\')" title="#'+ color + '"></td>');
+				if(r == 0 && g == 0 && b == 0){
+					for(i = 2; i < 6; i++){
+						color = String(numberList[i]) + String(numberList[i]) + String(numberList[i]);
+						document.write('<td><input type="button" style="background-color:#'+ color + ';height:' + height + 'px;width:100%;" onClick="insert_bbcode(\'[color=#' + color + ']\',\'[/color]\')" title="#'+ color + '"></td>');
+					}
+				}
+			}
+		}
+	}
+	document.writeln('</tr></table>');
+}
+window.onload = linkstoframe;
+</script>
+<div style="border:#A9B8C2 1px solid;margin-bottom:15px;">
+<table class="row1" cellspacing="1" width="100%">
+	<tr>
+		<th>
+		<!-- IF TB_U_CP -->
+			<a href="{TB_U_CP}" title="tag_board"><img src="{T_THEME_PATH}/images/icon_tb_settings.gif" align="absmiddle" border="0" alt="{L_SETTINGS}"></a>
+		<!-- ENDIF -->
+			<a href="http://bx67212.netsons.org" title="powered by bx67212">Tag Board</a>
+		<!-- IF TB_AUTH == "2" or S_USER_LOGGED_IN -->
+			::
+			<a href="{TB_U_READALL}" title="tag_board">{TB_ALL_POSTS}</a> {L_MESSAGES} 
+			<a href="{TB_U_REFRESH}" title="tag_board"><img src="{T_THEME_PATH}/images/icon_tb_refresh.gif" align="absmiddle" border="0" alt="{L_UPDATE}"></a>
+		<!-- ENDIF -->
+		</th>
+	</tr>
+</table>
+<!-- IF TB_AUTH == "2" or S_USER_LOGGED_IN -->
+<form action="{TB_S_ACTION}" method="post" target="tag_board" onSubmit="javascript:setTimeout('clear_input()',350)">
+	<!-- IF TB_BUTTONS -->
+	<table width="100%" class="row1">
+		<tr>
+			<td>
+				<input type="button" class="button2" value=" B " style="font-weight:bold;width:25px" onClick="insert_bbcode('[b]','[/b]')" title="Ex: [b]text[/b]">
+				<input type="button" class="button2" value=" i " style="font-style:italic;width:25px" onClick="insert_bbcode('[i]','[/i]')" title="Ex: [i]text[/i]">
+				<input type="button" class="button2" value=" u " style="text-decoration:underline;width:25px" onClick="insert_bbcode('[u]','[/u]')" title="Ex: [u]text[/u]">
+				<input type="button" class="button2" value="URL" style="text-decoration:underline;width:35px" onClick="insert_bbcode('[url]','[/url]')" title="Ex: [url]text[/url]">
+				<input type="button" class="button2" value="Code" onClick="insert_bbcode('[code]','[/code]')" title="Ex: [code]text[/code]">
+				<input type="button" class="button2" value="Quote" onClick="insert_bbcode('[quote]','[/quote]')" title="Ex: [quote]text[/quote]">
+				<input type="button" class="button2" value="Color" onClick="dE('color_palette')" title="Ex: [color=#000000]text[/color]">
+				<input type="button" class="button2" value="Smilies" onClick="dE('smilies')" title="Smilies">
+	 		</td>
+			<!-- IF TB_BSW -->
+	  		<td style="color:#000;" align="right">
+				<input type="checkbox" name="b" value="1"> <font color="#444444">{L_TB_B}</font>
+				<input type="checkbox" name="s" value="1"> <font color="#444444">{L_TB_S}</font>
+				<input type="checkbox" name="w" value="1"> <font color="#444444">{L_TB_W}</font>
+	  		</td>
+			<!-- ENDIF -->
+		</tr>
+	</table>
+	<div id="color_palette" style="display:none;" align="center" class="row1"><script type="text/javascript">color_palette(20);</script></div>
+	<div id="smilies" style="display:none;" align="center" class="row1">
+		<table width="99%" cellspacing="2">
+			<tr>
+						<td><input type="button" onClick="insert_smilies(':grin:')" style="background-image:url({T_SMILIES_PATH}icon_e_biggrin.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Very Happy"></td>
+						<td><input type="button" onClick="insert_smilies(':smile:')" style="background-image:url({T_SMILIES_PATH}icon_e_smile.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Smile"></td>
+						<td><input type="button" onClick="insert_smilies(':wink:')" style="background-image:url({T_SMILIES_PATH}icon_e_wink.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Wink"></td>
+						<td><input type="button" onClick="insert_smilies(':sad:')" style="background-image:url({T_SMILIES_PATH}icon_e_sad.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Sad"></td>
+						<td><input type="button" onClick="insert_smilies(':eek:')" style="background-image:url({T_SMILIES_PATH}icon_e_surprised.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Surprised"></td>
+						<td><input type="button" onClick="insert_smilies(':shock:')" style="background-image:url({T_SMILIES_PATH}icon_eek.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Shocked"></td>
+						<td><input type="button" onClick="insert_smilies(':???:')" style="background-image:url({T_SMILIES_PATH}icon_e_confused.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Confused"></td>
+						<td><input type="button" onClick="insert_smilies(':cool:')" style="background-image:url({T_SMILIES_PATH}icon_cool.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Cool"></td>
+						<td><input type="button" onClick="insert_smilies(':lol:')" style="background-image:url({T_SMILIES_PATH}icon_lol.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Laughing"></td>
+						<td><input type="button" onClick="insert_smilies(':mad:')" style="background-image:url({T_SMILIES_PATH}icon_mad.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Mad"></td>
+						<td><input type="button" onClick="insert_smilies(':razz:')" style="background-image:url({T_SMILIES_PATH}icon_razz.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Razz"></td>
+						<td><input type="button" onClick="insert_smilies(':oops:')" style="background-image:url({T_SMILIES_PATH}icon_redface.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Embarrassed"></td>
+						<td><input type="button" onClick="insert_smilies(':cry:')" style="background-image:url({T_SMILIES_PATH}icon_cry.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Crying or Very Sad"></td>
+						<td><input type="button" onClick="insert_smilies(':evil:')" style="background-image:url({T_SMILIES_PATH}icon_evil.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Uber Geek"></td>
+						<td><input type="button" onClick="insert_smilies(':twisted:')" style="background-image:url({T_SMILIES_PATH}icon_twisted.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Twisted Evil"></td>
+						<td><input type="button" onClick="insert_smilies(':roll:')" style="background-image:url({T_SMILIES_PATH}icon_rolleyes.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Rolling Eyes"></td>
+						<td><input type="button" onClick="insert_smilies(':!:')" style="background-image:url({T_SMILIES_PATH}icon_exclaim.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Exclamation"></td>
+						<td><input type="button" onClick="insert_smilies(':?:')" style="background-image:url({T_SMILIES_PATH}icon_question.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Question"></td>
+						<td><input type="button" onClick="insert_smilies(':idea:')" style="background-image:url({T_SMILIES_PATH}icon_idea.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Idea"></td>
+						<td><input type="button" onClick="insert_smilies(':arrow:')" style="background-image:url({T_SMILIES_PATH}icon_arrow.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Arrow"></td>
+						<td><input type="button" onClick="insert_smilies(':neutral:')" style="background-image:url({T_SMILIES_PATH}icon_neutral.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Neutral"></td>
+						<td><input type="button" onClick="insert_smilies(':mrgreen:')" style="background-image:url({T_SMILIES_PATH}icon_mrgreen.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Mr. Green"></td>
+						<td><input type="button" onClick="insert_smilies(':geek:')" style="background-image:url({T_SMILIES_PATH}icon_e_geek.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Geek"></td>
+						<td><input type="button" onClick="insert_smilies(':ugeek:')" style="background-image:url({T_SMILIES_PATH}icon_e_ugeek.gif);background-repeat:no-repeat;background-position:center;height:24px;width:100%;" title="Uber Geek"></td>
+			</tr>
+		</table>
+	</div>
+	<!-- ENDIF -->
+	<table width="100%" class="row1">
+		<tr>
+			<td width="100%"><input name="tb_message" id="tb_message" class="inputbox" style="width:99%;height:15px" maxlength="{TB_MAXLENGTH}"></td>
+	 		<td><input type="submit" value="{L_SUBMIT}" class="button1"></td>
+		</tr>
+	</table>
+</form>
+<!-- ENDIF -->
+<table width="100%" class="row1">
+<!-- IF TB_AUTH == "1" or TB_AUTH == "2" or S_USER_LOGGED_IN -->
+	<tr>
+		<td><iframe name="tag_board" id="tag_board" src="{TB_U_REFRESH}" frameborder="0" height="140" width="100%" marginheight="0"></iframe></td>
+	</tr>
+	<!-- ELSE -->
+	<tr>
+		<td align="center"><font color="red">{L_NOT_AUTHORISED}</font></td>
+	</tr>
+<!-- ENDIF -->
+</table>
+</div>
