@@ -18,9 +18,14 @@
 				<username>bx67212</username>
 				<homepage>http://bx67212.netsons.org</homepage>
 			</author>
+			<author>
+				<realname>Tony Frost</realname>
+				<username>Sir Xiradorn</username>
+				<homepage>http://xiradorn.it</homepage>
+			</author>
 		</author-group>
 		
-		<mod-version>3.0.7</mod-version>
+		<mod-version>3.0.7.1</mod-version>
 		
 		<installation>
 			<level>easy</level>
@@ -90,6 +95,7 @@
 		<link-group>
 			<link type="template" href="subsilver2.xml" lang="en">subsilver2</link>
 			<link type="language" href="it.xml" lang="en">italian</link>
+			<link type="language" href="en.xml" lang="en">english</link>
 			<link type="language" href="de.xml" lang="en">german</link>
 			<link type="contrib" href="contrib/Message_System_Plugin.xml" lang="en">Message System Plugin</link>
 		</link-group>

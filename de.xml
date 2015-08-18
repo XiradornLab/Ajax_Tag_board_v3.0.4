@@ -16,20 +16,33 @@
 				<username>bx67212</username>
 				<homepage>http://bx67212.netsons.org</homepage>
 			</author>
+			<author>
+				<realname>Tony Frost</realname>
+				<username>Sir Xiradorn</username>
+				<homepage>http://xiradorn.it</homepage>
+			</author>
 		</author-group>
 		
-		<mod-version>3.0.7</mod-version>
+		<mod-version>3.0.7.1</mod-version>
 		
 		<installation>
 			<level>easy</level>
 			<time>60</time>
-			<target-version>3.0.7</target-version>
+			<target-version>3.0.7.1</target-version>
 		</installation>
 	</header>
 	
 	<action-group>
-		<copy>
-			<file from="root/language/de/tag_board.php" to="language/de/tag_board.php" />
-		</copy>
+		<open src="language/it/common.php">
+			<edit>
+				<find><![CDATA[?>
+]]></find>
+				<action type="before-add"><![CDATA[$lang = array_merge($lang, array(
+	'TB_B'			=> 'Deaktivieren BBCode',
+	'TB_S'			=> 'Deaktivieren smilies',
+	'TB_W'			=> 'Nicht automatisch URLs analysieren',
+));]]></action>
+			</edit>
+		</open>
 	</action-group>
 </mod>

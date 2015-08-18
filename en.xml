@@ -6,7 +6,7 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 		
-		<title lang="en">AJAX TAG BOARD 4 phpBB3 - italian</title>
+		<title lang="en">AJAX TAG BOARD 4 phpBB3 - english</title>
 		
 		<description lang="en">Add ajax tagboard to a phpBB3 board</description>
 		
@@ -38,9 +38,9 @@
 				<find><![CDATA[?>
 ]]></find>
 				<action type="before-add"><![CDATA[$lang = array_merge($lang, array(
-	'TB_B'			=> 'Disabilita BBCode',
-	'TB_S'			=> 'Disabilita smilies',
-	'TB_W'			=> 'Non analizzare automaticamente gli URL',
+	'TB_B'			=> 'Disable BBCode',
+	'TB_S'			=> 'Disable smilies',
+	'TB_W'			=> 'Not automatically analyze URLs',
 ));]]></action>
 			</edit>
 		</open>
